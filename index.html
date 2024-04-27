@@ -1,13 +1,50 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
+
 <head>
-    <base target="_top">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เว็บแอป</title>
+    <title>Hino Connect : Driver Verify System</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
+
 <body>
-    <iframe style="width: 100%; height: 100vh;" scrolling="yes" src="https://script.google.com/macros/s/AKfycbxfz3cqdF8xVYkY4lkbzSQtx3HhoWhd9K54Wum6hSJCLZOSZ_SO-K0O5yPx4iMDi1J7/exec" frameborder="0"></iframe>
+    <iframe id="formframe" src="" frameborder="0"></iframe>
 </body>
+<script src="https://static.line-scdn.net/liff/edge/versions/2.15.0/sdk.js"></script>
+<script>
+    
+    function runApp() {
+        liff.getProfile().then(profile => {
+            let userId = profile.userId;
+            let displayName = profile.displayName;
+            let pictureUrl = profile.pictureUrl;
+            let url = "https://script.google.com/macros/s/AKfycbyMkW7C9BIKPjtw6VPCtpqeiBYaGQcsdQtfFY6MSty10mUpQYElLs2p675rE2PL739V/exec?userId=" + userId + "&displayName=" + displayName + "&pictureUrl=" + pictureUrl;
+            document.getElementById("formframe").src = url;
+        }).catch(err => console.error(err));
+    }
+
+    liff.init({ liffId: "2004349884-XepmPJ7Y" }, () => {
+        if (liff.isLoggedIn()) {
+            runApp();
+        } else {
+            liff.login();
+        }
+    }, err => console.error(err.code, error.message));
+
+</script>
+
 </html>
